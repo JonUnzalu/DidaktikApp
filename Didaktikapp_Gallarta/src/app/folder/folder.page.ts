@@ -22,7 +22,7 @@ export class FolderPage implements OnInit {
     const popover = await this.popoverController.create({
       animated: true,
       component: PopupPage,
-      cssClass: 'my-propover-class',
+      cssClass: 'guri-bu',
       event: ev,
       translucent: true
     });
@@ -32,7 +32,7 @@ export class FolderPage implements OnInit {
     const popover = await this.popoverController.create({
       animated: true,
       component: TestjokoaPage,
-      cssClass: 'my-propover-class',
+      cssClass: 'test-joko',
       event: ev,
       translucent: true
     });
