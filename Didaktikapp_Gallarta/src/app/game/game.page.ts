@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+
 
 declare var google;
 
@@ -78,10 +80,23 @@ export class GamePage implements OnInit {
     },
   ];
 
-  constructor() { }
+  markerPruebas: Marker = {
+    position: {
+      lat: 45.3172139999999,
+      lng: -3.074152777777778,
+    },
+    title: 'aaaaaa'
+  };
+
+  constructor() { 
+  }
 
   ngOnInit() {
     this.loadMap();
+  }
+
+  markerEvent(){
+    this.addMarker(this.markerPruebas);
   }
 
   loadMap() {
@@ -94,7 +109,6 @@ export class GamePage implements OnInit {
       center: myLatLng,
       zoom: 18
     });
-  
 
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       this.renderMarkers();
@@ -106,13 +120,31 @@ export class GamePage implements OnInit {
     const imageGreen = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
     const imageRed = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
 
-
-    return new google.maps.Marker({
+    let mapMarker = new google.maps.Marker({
       position: marker.position,
       map: this.map,
       title: marker.title,
-      icon: imageGreen
+      icon: imageRed
     });
+
+    var infowindow = new google.maps.InfoWindow({
+      size: new google.maps.Size(150, 100)
+    });
+
+    let content = 
+    "<ion-card>"+ 
+      "<ion-card-header>"+
+        "<ion-card-title style='text-align: center;'>" + mapMarker.title +"</ion-card-title>"+ 
+      "</ion-card-header> "+
+      "<ion-button (click)='lanzarPopUp()' style='text-align: center;'>SARTU</ion-button>"+
+    "</ion-card>"
+
+    google.maps.event.addListener(mapMarker, 'click', function () {
+      infowindow.setContent(content);
+      infowindow.open(this.map, mapMarker);
+    });
+
+    return mapMarker;
   }
 
   renderMarkers() {
