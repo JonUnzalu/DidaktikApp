@@ -1,0 +1,7 @@
+{
+  "name": "Didaktikapp_Gallarta",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

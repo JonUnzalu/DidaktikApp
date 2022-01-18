@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Didaktik App</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+
+    <ion-img class="argazkia" src="../../assets/img/pasionaria.png"></ion-img>
+
+    <ion-button (click)="maparaJoan()" shape="round" fill="outline" color="dark">Jolastu</ion-button>
+    <br>
+    <ion-button (click)="abrirPopover()" fill="outline" color="dark">Guri Buruz</ion-button>
+    <br>
+    <ion-button (click)="abrirJuego()" fill="outline" color="dark">Guri Buruz</ion-button>
+    <br>
+    <ion-button shape="round" fill="outline" color="dark">Irten</ion-button>
+
+  </div>
+</ion-content>
