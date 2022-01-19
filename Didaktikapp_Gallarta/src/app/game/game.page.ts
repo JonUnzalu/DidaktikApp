@@ -95,11 +95,12 @@ export class GamePage implements OnInit {
   }
 
   ngOnInit() {
-    this.getLokalizazioak();
     this.loadMap();
   }
 
   loadMap() {
+    this.getLokalizazioak();
+
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('map');
     // create LatLng object
@@ -109,6 +110,8 @@ export class GamePage implements OnInit {
       center: myLatLng,
       zoom: 18
     });
+
+    alert("Mapa zabalduko da.");
 
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       this.renderMarkers();
@@ -125,17 +128,12 @@ export class GamePage implements OnInit {
       for (let i = 0; i < this.stringify.length; i++) {
         const markerToAdd = {position: {
             lat: 0.0,
-            lng: 0.0,
-          },
-          title: ''} as Marker;
+            lng: 0.0, },
+        title: ''} as Marker;
 
-        const c = this.stringify[i].izena;
-        const a = parseFloat(this.stringify[i].longitudea);
-        const b = parseFloat(this.stringify[i].latitudea);
-
-        markerToAdd.title = c;
-        markerToAdd.position.lng = a;
-        markerToAdd.position.lat = b;
+        markerToAdd.title = this.stringify[i].izena;
+        markerToAdd.position.lng = parseFloat(this.stringify[i].longitudea);
+        markerToAdd.position.lat = parseFloat(this.stringify[i].latitudea);
 
         this.markersJson.push(markerToAdd);
       }
