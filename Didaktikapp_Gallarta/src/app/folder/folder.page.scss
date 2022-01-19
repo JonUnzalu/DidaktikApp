@@ -25,23 +25,11 @@ ion-menu-button {
 #container p {
   font-size: 16px;
   line-height: 22px;
-  color: #8c8c8c;
   margin: 0;
 }
+ion-content{
+  --ion-background-color: #c95148;
+}
 
-#container a {
-  text-decoration: none;
-}
-ion-content{
-  --background: url("../../assets/img/menu.jpg") no-repeat;
-}
-.a{
-  color: #d9d9d9;
-}
-ion-content{
-  background-color: transparent;
-}
-ion-toolbar{
-  background-color: transparent;
-}
+
 
