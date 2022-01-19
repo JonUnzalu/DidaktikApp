@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import {LokalizazioakService} from './../../service/lokalizazioak.service';
 
 
 declare var google;
@@ -18,7 +19,9 @@ interface Marker {
   styleUrls: ['./game.page.scss'],
 })
 export class GamePage implements OnInit {
-
+  public folder: string;
+  txt: any;
+  stringify: any;
   map = null;
 
   markers: Marker[] = [
@@ -80,11 +83,19 @@ export class GamePage implements OnInit {
     },
   ];
 
+  markersJson: Marker[] = [{
+    position: {
+      lat: 11.3172139999999,
+      lng: 11.074152777777778,
+    },
+    title: 'aaaa'
+  }];
 
-  constructor() { 
+  constructor(public lokalizazioaService: LokalizazioakService) {
   }
 
   ngOnInit() {
+    this.getLokalizazioak();
     this.loadMap();
   }
 
@@ -105,6 +116,33 @@ export class GamePage implements OnInit {
     });
   }
 
+  getLokalizazioak() {
+    this.lokalizazioaService.lokalizazioak().then(data => {
+      this.txt = JSON.stringify(data);
+      this.stringify = JSON.parse(this.txt);
+
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
+      for (let i = 0; i < this.stringify.length; i++) {
+        const markerToAdd = {position: {
+            lat: 0.0,
+            lng: 0.0,
+          },
+          title: ''} as Marker;
+
+        const c = this.stringify[i].izena;
+        const a = parseFloat(this.stringify[i].longitudea);
+        const b = parseFloat(this.stringify[i].latitudea);
+
+        markerToAdd.title = c;
+        markerToAdd.position.lng = a;
+        markerToAdd.position.lat = b;
+
+        this.markersJson.push(markerToAdd);
+      }
+    });
+  }
+
+
   addMarker(marker: Marker) {
     const imageGreen = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
     const imageRed = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
@@ -120,10 +158,10 @@ export class GamePage implements OnInit {
       size: new google.maps.Size(500, 500)
     });
 
-    let content = 
-    "<ion-card>"+ 
+    let content =
+    "<ion-card>"+
       "<ion-card-header>"+
-        "<ion-card-title style='text-align: center;'>" + mapMarker.title +"</ion-card-title>"+ 
+        "<ion-card-title style='text-align: center;'>" + mapMarker.title +"</ion-card-title>"+
       "</ion-card-header> "+
       "<ion-button (click)='lanzarPopUp()' style='text-align: center;'>SARTU</ion-button>"+
     "</ion-card>"
@@ -141,7 +179,7 @@ export class GamePage implements OnInit {
   }
 
   renderMarkers() {
-    this.markers.forEach(marker => {
+    this.markersJson.forEach(marker => {
       this.addMarker(marker);
     });
   }
