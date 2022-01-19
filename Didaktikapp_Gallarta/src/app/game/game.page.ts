@@ -80,23 +80,12 @@ export class GamePage implements OnInit {
     },
   ];
 
-  markerPruebas: Marker = {
-    position: {
-      lat: 45.3172139999999,
-      lng: -3.074152777777778,
-    },
-    title: 'aaaaaa'
-  };
 
   constructor() { 
   }
 
   ngOnInit() {
     this.loadMap();
-  }
-
-  markerEvent(){
-    this.addMarker(this.markerPruebas);
   }
 
   loadMap() {
@@ -128,7 +117,7 @@ export class GamePage implements OnInit {
     });
 
     var infowindow = new google.maps.InfoWindow({
-      size: new google.maps.Size(150, 100)
+      size: new google.maps.Size(500, 500)
     });
 
     let content = 
@@ -145,6 +134,10 @@ export class GamePage implements OnInit {
     });
 
     return mapMarker;
+  }
+
+  lanzarPopUp(){
+    console.log('aaaaaaa');
   }
 
   renderMarkers() {
