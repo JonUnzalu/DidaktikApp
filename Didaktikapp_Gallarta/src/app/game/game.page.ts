@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import {LokalizazioakService} from './../../service/lokalizazioak.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
 declare var google;
@@ -23,99 +24,76 @@ export class GamePage implements OnInit {
   txt: any;
   stringify: any;
   map = null;
-
-  markers: Marker[] = [
-    {
-      position: {
-        lat: 43.3172139999999,
-        lng: -3.074152777777778,
-      },
-      title: 'Dolores Ibarruri estatua'
-    },
-    {
-      position: {
-        lat: 43.3150917,
-        lng: -3.074205555555556,
-      },
-      title: 'Gallarta berriaren montumentua'
-    },
-    {
-      position: {
-        lat: 43.3115889,
-        lng: -3.073341666666667,
-      },
-      title: 'Gallarta zaharraren montumentua: Burdina'
-    },
-    {
-      position: {
-        lat: 43.3107722,
-        lng: -3.0748027777777778,
-      },
-      title: 'Meategia'
-    },
-    {
-      position: {
-        lat: 43.3115778,
-        lng: -3.0714305555555557,
-      },
-      title: 'Mineral garbitokia'
-    },
-    {
-      position: {
-        lat: 43.3113306,
-        lng: -3.0715583333333334,
-      },
-      title: 'Meatze-trenbidea'
-    },
-    {
-      position: {
-        lat: 43.3124111,
-        lng: -3.0754916666666667,
-      },
-      title: 'Tiranoko meatzaritza ospitalea (Prebentorioa)'
-    },
-    {
-      position: {
-        lat: 43.3116222,
-        lng: -3.0702333333333334,
-      },
-      title: 'Euskal Herriko meatzaritza museoa'
-    },
-  ];
+  latitudMapa = 0.0;
+  longitudMapa = 0.0;
 
   markersJson: Marker[] = [{
     position: {
-      lat: 11.3172139999999,
-      lng: 11.074152777777778,
+      lat: 0.0,
+      lng: 0.0,
     },
-    title: 'aaaa'
+    title: ''
   }];
 
-  constructor(public lokalizazioaService: LokalizazioakService) {
+  constructor(private geolocation: Geolocation, public lokalizazioaService: LokalizazioakService) {
+  }
+  
+  getCurrentCoordinates() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.latitudMapa = resp.coords.latitude;
+      this.longitudMapa = resp.coords.longitude;
+
+      this.getLokalizazioak();
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
   }
 
   ngOnInit() {
-    this.loadMap();
+    this.getCurrentCoordinates();
   }
 
   loadMap() {
-    this.getLokalizazioak();
-
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('map');
     // create LatLng object
-    const myLatLng = {lat: 43.3172139999999, lng: -3.0742055555};
+    const myLatLng = {lat: this.latitudMapa, lng: this.longitudMapa};
     // create map
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
       zoom: 18
     });
 
-    alert("Mapa zabalduko da.");
-
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       this.renderMarkers();
       mapEle.classList.add('show-map');
+    });
+
+  /**  let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+      let latLng = new google.maps.LatLng(data)
+      let marker = new google.maps.Marker({
+        map: this.map,
+        icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
+          new google.maps.Size(22, 22),
+          new google.maps.Point(0, 18),
+          new google.maps.Point(11, 11)),
+        position: latLng
+      });
+    
+      let content = "<h4>You are here</h4>";
+      this.addInfoWindow(marker, content);
+    }); **/
+  }
+
+  addInfoWindow(marker, content) {
+
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
     });
   }
 
@@ -137,6 +115,8 @@ export class GamePage implements OnInit {
 
         this.markersJson.push(markerToAdd);
       }
+
+      this.loadMap();
     });
   }
 
@@ -173,12 +153,13 @@ export class GamePage implements OnInit {
   }
 
   lanzarPopUp(){
-    console.log('aaaaaaa');
   }
 
   renderMarkers() {
     this.markersJson.forEach(marker => {
-      this.addMarker(marker);
+      if(marker.title != ''){
+        this.addMarker(marker);
+      }
     });
   }
 
