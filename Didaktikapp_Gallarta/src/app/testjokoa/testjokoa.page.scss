@@ -2,27 +2,23 @@ ion-button{
   height: 30px;
   font-size: 10px;
 }
-#galdera1{
-  font-size: 20px;
-}
-#erantzuna{
-  font-size: 5px;
-}
 ion-title{
   font-size: 15px;
   font-weight: bold;
   float: left;
 }
-#hurrengoa{
-  float: right;
+#botones{
+  display: flex;
 }
+
 ion-content{
   position: center;
   margin-right: 30px;
   width: 250px;
-  height: 300px;
+  height: 315px;
 }
 ion-header{
   float: left;
 }
+
 

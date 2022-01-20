@@ -6,32 +6,34 @@
 
   <ion-content>
     <ion-list>
-      <ion-radio-group value="biff">
+      <ion-radio-group [(ngModel)]="aukeratutakoerantzuna">
         <ion-list-header>
-          <ion-label id="galdera1">Galdera</ion-label>
+          <ion-label style="font-size: 16px; text-align: center;" id="galdera1">{{gald}}</ion-label>
         </ion-list-header>
 
-        <ion-item>
-          <ion-label id="erantzuna">Biff</ion-label>
-          <ion-radio slot="start" value="biff"></ion-radio>
+        <ion-item [style.--background]="colorVar1">
+          <ion-label style="font-size: 12px" id="erantzuna">{{era}}</ion-label>
+          <ion-radio value="1" slot="start"></ion-radio>
         </ion-item>
 
-        <ion-item>
-          <ion-label id="erantzuna2">Griff</ion-label>
-          <ion-radio slot="start" value="griff"></ion-radio>
+        <ion-item [style.--background]="colorVar2">
+          <ion-label style="font-size: 12px" id="erantzuna2">{{era2}}</ion-label>
+          <ion-radio value="2" slot="start"></ion-radio>
         </ion-item>
 
-        <ion-item id="erantzuna3">
-          <ion-label>Buford</ion-label>
-          <ion-radio slot="start" value="buford"></ion-radio>
+        <ion-item *ngIf="era3Visible" [style.--background]="colorVar3">
+          <ion-label style="font-size: 12px" class="ion-text-wrap" id="erantzuna3">{{era3}}</ion-label>
+          <ion-radio value="3" slot="start"></ion-radio>
+        </ion-item>
+        <ion-item *ngIf="era4Visible" [style.--background]="colorVar4">
+          <ion-label style="font-size: 12px" id="erantzuna4">{{era4}}</ion-label>
+          <ion-radio value="4" slot="start"></ion-radio>
         </ion-item>
       </ion-radio-group>
     </ion-list>
-    <br>
-
-    <ion-button shape="round" fill="outline" color="dark">Atzera</ion-button>
-    <ion-button id="hurrengoa" shape="round" fill="outline" color="dark">Hurrengoa</ion-button>
-
-
+    <div id="botones">
+      <ion-button (click)="zuzendu()" shape="round" fill="outline" color="dark">Zuzendu</ion-button>
+      <!--<ion-button (click)="hurrengoGaldera()" id="hurrengoa" shape="round" fill="outline" color="dark">Hurrengoa</ion-button>-->
+    </div>
   </ion-content>
 
