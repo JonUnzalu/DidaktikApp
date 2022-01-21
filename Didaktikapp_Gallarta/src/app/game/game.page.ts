@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, PopoverController } from '@ionic/angular';
 import {LokalizazioakService} from './../../service/lokalizazioak.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { TestjokoaPage } from '../testjokoa/testjokoa.page';
 
 
 declare var google;
@@ -35,7 +36,7 @@ export class GamePage implements OnInit {
     title: ''
   }];
 
-  constructor(private geolocation: Geolocation, public lokalizazioaService: LokalizazioakService) {
+  constructor(private geolocation: Geolocation, public lokalizazioaService: LokalizazioakService, public popoverController: PopoverController) {
   }
   
   getCurrentCoordinates() {
@@ -133,26 +134,43 @@ export class GamePage implements OnInit {
     });
 
     var infowindow = new google.maps.InfoWindow({
-      size: new google.maps.Size(500, 500)
+      size: new google.maps.Size(500, 500),
+      enableEventPropagation: true
     });
 
     let content =
     "<ion-card>"+
       "<ion-card-header>"+
-        "<ion-card-title style='text-align: center;'>" + mapMarker.title +"</ion-card-title>"+
+        "<ion-card-title id='kokapenIzena' style='text-align: center;'>" + mapMarker.title +"</ion-card-title>"+
       "</ion-card-header> "+
-      "<ion-button (click)='lanzarPopUp()' style='text-align: center;'>SARTU</ion-button>"+
+      "<ion-button id='sartuBtn' style='text-align: center;'>SARTU</ion-button>"+
     "</ion-card>"
+
+
 
     google.maps.event.addListener(mapMarker, 'click', function () {
       infowindow.setContent(content);
       infowindow.open(this.map, mapMarker);
     });
 
+    infowindow.addListener('domready', () => {
+      document.getElementById("sartuBtn").addEventListener("click", () => {
+        this.lanzarPopUp(document.getElementById("kokapenIzena").innerHTML);
+      });
+    });
+
     return mapMarker;
   }
 
-  lanzarPopUp(){
+  lanzarPopUp(aa){
+    switch(aa){
+      case "Euskal Herriko meatzaritza museoa":
+        break;
+
+      case "Gallarta berriaren montumentua":
+        this.abrirJuego();
+        break;
+    };
   }
 
   renderMarkers() {
@@ -163,5 +181,14 @@ export class GamePage implements OnInit {
     });
   }
 
+  async abrirJuego(){
+    const popover = await this.popoverController.create({
+      animated: true,
+      component: TestjokoaPage,
+      cssClass: 'test-joko',
+      translucent: true
+    });
+    return await popover.present();
+  }
 
 }
