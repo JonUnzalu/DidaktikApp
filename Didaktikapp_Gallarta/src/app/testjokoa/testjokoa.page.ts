@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 
 interface Galdera {
   galdera: string;
@@ -24,7 +25,7 @@ export class TestjokoaPage implements OnInit {
   public era4: string;
   public aukeratutakoerantzuna: string;
   public indexGalderak: number;
-
+  @Input() controller: PopoverController;
   public colorVar1: string;
   public colorVar2: string;
   public colorVar3: string;
@@ -35,7 +36,7 @@ export class TestjokoaPage implements OnInit {
   public era4Visible = true;
 
 
-  constructor() {
+  constructor(public popoverController: PopoverController) {
   }
 
   ngOnInit() {
@@ -127,10 +128,10 @@ export class TestjokoaPage implements OnInit {
       this.aukeratutakoerantzuna='0';
     }
     else{
+      alert('Hurrengo lekura mugitu ahal zara. Zorionak!');
       this.indexGalderak = this.indexGalderak - 1;
+      this.controller.dismiss();
     }
-
-
   }
 
   zuzendu(){

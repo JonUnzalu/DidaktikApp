@@ -33,16 +33,6 @@ export class FolderPage implements OnInit {
     });
     return await popover.present();
   }
-  async abrirJuego( ev: any){
-    const popover = await this.popoverController.create({
-      animated: true,
-      component: TestjokoaPage,
-      cssClass: 'test-joko',
-      event: ev,
-      translucent: true
-    });
-    return await popover.present();
-  }
   maparaJoan() {
     this.route.navigate(['/game']);
   }

@@ -38,7 +38,7 @@ export class GamePage implements OnInit {
 
   constructor(private geolocation: Geolocation, public lokalizazioaService: LokalizazioakService, public popoverController: PopoverController) {
   }
-  
+
   getCurrentCoordinates() {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitudMapa = resp.coords.latitude;
@@ -81,7 +81,7 @@ export class GamePage implements OnInit {
           new google.maps.Point(11, 11)),
         position: latLng
       });
-    
+
       let content = "<h4>You are here</h4>";
       this.addInfoWindow(marker, content);
     }); **/
@@ -186,7 +186,11 @@ export class GamePage implements OnInit {
       animated: true,
       component: TestjokoaPage,
       cssClass: 'test-joko',
-      translucent: true
+      translucent: true,
+      backdropDismiss: false,
+      componentProps: {
+        controller: this.popoverController
+      }
     });
     return await popover.present();
   }
