@@ -139,11 +139,11 @@ export class GamePage implements OnInit {
     });
 
     let content =
-    "<ion-card>"+
+    "<ion-card style='margin:auto; text-align: center'>"+
       "<ion-card-header>"+
-        "<ion-card-title id='kokapenIzena' style='text-align: center;'>" + mapMarker.title +"</ion-card-title>"+
+        "<ion-card-title id='kokapenIzena' style='text-align: center; margin: auto; font-size: 15px'>" + mapMarker.title +"</ion-card-title>"+
       "</ion-card-header> "+
-      "<ion-button id='sartuBtn' style='text-align: center;'>SARTU</ion-button>"+
+      "<ion-button id='sartuBtn' style='text-align: center; width: 55px;height: 35px;'>SARTU</ion-button>"+
     "</ion-card>"
 
 
