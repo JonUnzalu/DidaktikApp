@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, AlertController } from '@ionic/angular';
 
 interface Galdera {
   galdera: string;
@@ -36,7 +36,7 @@ export class TestjokoaPage implements OnInit {
   public era4Visible = true;
 
 
-  constructor(public popoverController: PopoverController) {
+  constructor(public popoverController: PopoverController, public alertController: AlertController) {
   }
 
   ngOnInit() {
@@ -128,10 +128,24 @@ export class TestjokoaPage implements OnInit {
       this.aukeratutakoerantzuna='0';
     }
     else{
-      alert('Hurrengo lekura mugitu ahal zara. Zorionak!');
       this.indexGalderak = this.indexGalderak - 1;
+
+      this.abrirAlert();
+
       this.controller.dismiss();
     }
+  }
+
+  async  abrirAlert(){
+    const alert =  await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Zorionak!',
+      subHeader: 'Hurrengo lekura joan ahal zaiteke.',
+      message: ' ',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
   zuzendu(){
