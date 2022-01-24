@@ -3,6 +3,7 @@ import { IonicModule, PopoverController } from '@ionic/angular';
 import {LokalizazioakService} from './../../service/lokalizazioak.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { TestjokoaPage } from '../testjokoa/testjokoa.page';
+import { VideoPage } from '../video/video.page';
 
 
 declare var google;
@@ -58,7 +59,8 @@ export class GamePage implements OnInit {
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('map');
     // create LatLng object
-    const myLatLng = {lat: this.latitudMapa, lng: this.longitudMapa};
+    //const myLatLng = {lat: this.latitudMapa, lng: this.longitudMapa};
+    const myLatLng = {lat: 43.3150917000, lng: -3.074205555555};
     // create map
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
@@ -169,6 +171,7 @@ export class GamePage implements OnInit {
 
       case "Gallarta berriaren montumentua":
         this.abrirJuego();
+        this.abrirVideo();
         break;
     };
   }
@@ -179,6 +182,17 @@ export class GamePage implements OnInit {
         this.addMarker(marker);
       }
     });
+  }
+
+  async abrirVideo(){
+    const popover = await this.popoverController.create({
+      animated: true,
+      component: VideoPage,
+      cssClass: 'video-play',
+      translucent: true,
+      backdropDismiss: false
+    });
+    return await popover.present();
   }
 
   async abrirJuego(){

@@ -36,5 +36,9 @@ export class FolderPage implements OnInit {
   maparaJoan() {
     this.route.navigate(['/game']);
   }
+
+  irten(){
+    
+  }
 }
 
