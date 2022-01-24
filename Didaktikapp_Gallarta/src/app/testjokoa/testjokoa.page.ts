@@ -140,7 +140,7 @@ export class TestjokoaPage implements OnInit {
     const alert =  await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Zorionak!',
-      subHeader: 'Hurrengo lekura joan ahal zaiteke.',
+      subHeader: 'Hurrengo lekura joan zaitezke.',
       message: ' ',
       buttons: ['OK']
     });
