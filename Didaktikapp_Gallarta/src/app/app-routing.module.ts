@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'game',
     loadChildren: () => import('./game/game.module').then( m => m.GamePageModule)
-  },  {
+  },
+  {
     path: 'popup',
     loadChildren: () => import('./popup/popup.module').then( m => m.PopupPageModule)
   },
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'hutsuneakbete',
+    loadChildren: () => import('./hutsuneakbete/hutsuneakbete.module').then( m => m.HutsuneakbetePageModule)
   }
 
 ];
