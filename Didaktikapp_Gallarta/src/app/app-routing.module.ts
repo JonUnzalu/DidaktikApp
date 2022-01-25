@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'testjokoa',
     loadChildren: () => import('./testjokoa/testjokoa.module').then( m => m.TestjokoaPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   }
 
 ];
