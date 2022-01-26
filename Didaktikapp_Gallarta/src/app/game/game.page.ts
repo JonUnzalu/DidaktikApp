@@ -165,14 +165,13 @@ export class GamePage implements OnInit {
     return mapMarker;
   }
 
-  lanzarPopUp(aa){
-    switch(aa){
+  lanzarPopUp(kokapena){
+    switch(kokapena){
       case "Euskal Herriko meatzaritza museoa":
         break;
 
       case "Gallarta berriaren monumentua":
-        this.abrirJuego();
-        this.abrirVideo();
+        this.abrirVideo('1', '../../assets/video/video_jard1.mp4', 'Hasi galdetegia');
         break;
       case "Tiranoko meatzaritza ospitalea (Prebentorioa)":
         this.abrirJuego3();
@@ -188,15 +187,26 @@ export class GamePage implements OnInit {
     });
   }
 
-  async abrirVideo(){
+  async abrirVideo(ekintza, videoUrl, botoiEkintza){
     const popover = await this.popoverController.create({
       animated: true,
       component: VideoPage,
       cssClass: 'video-play',
       translucent: true,
-      backdropDismiss: false
+      backdropDismiss: false,
+      componentProps: {
+        video: videoUrl,
+        ekintza: botoiEkintza,
+        controller: this.popoverController
+      }
     });
-    return await popover.present();
+    await popover.present();
+
+    await popover.onDidDismiss();
+
+    if(ekintza==="1"){
+      this.abrirJuego();
+    }
   }
 
   async abrirJuego(){
@@ -210,8 +220,14 @@ export class GamePage implements OnInit {
         controller: this.popoverController
       }
     });
-    return await popover.present();
+
+    await popover.present();
+
+    await popover.onDidDismiss();
+
+    await this.abrirVideo('2', '../../assets/video/video_jard1amaiera.mp4', 'Itxi');
   }
+  
   async abrirJuego3(){
     const popover = await this.popoverController.create({
       animated: true,
