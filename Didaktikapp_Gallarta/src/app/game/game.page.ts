@@ -209,11 +209,11 @@ export class GamePage implements OnInit {
     await popover.onDidDismiss();
 
     if(ekintza==="1"){
-      this.abrirJuego();
+      this.abrirJuego1();
     }
   }
 
-  async abrirJuego(){
+  async abrirJuego1(){
     const popover = await this.popoverController.create({
       animated: true,
       component: TestjokoaPage,
