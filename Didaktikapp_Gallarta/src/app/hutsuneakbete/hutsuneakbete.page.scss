@@ -13,14 +13,14 @@
 #hiru{
   float: right;
   border: #0d0d0d 1px solid;
-  width: 120px;
+  width: 100px;
   height: 18px;
   margin-right: 10px;
 }
 #lau{
   float: left;
   border: #0d0d0d 1px solid;
-  width: 60px;
+  width: 50px;
   height: 18px;
 }
 #bost{
@@ -38,5 +38,9 @@ ion-content{
 }
 ion-button{
   height: 18px;
-
+  margin-top: 10px;
+}
+#zuzendu{
+  margin-top: 20px;
+  height: 25px;
 }
