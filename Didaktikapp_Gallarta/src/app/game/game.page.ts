@@ -68,27 +68,10 @@ export class GamePage implements OnInit {
       center: myLatLng,
       zoom: 18
     });
-
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       this.renderMarkers();
       mapEle.classList.add('show-map');
     });
-
-  /**  let watch = this.geolocation.watchPosition();
-    watch.subscribe((data) => {
-      let latLng = new google.maps.LatLng(data)
-      let marker = new google.maps.Marker({
-        map: this.map,
-        icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
-          new google.maps.Size(22, 22),
-          new google.maps.Point(0, 18),
-          new google.maps.Point(11, 11)),
-        position: latLng
-      });
-
-      let content = "<h4>You are here</h4>";
-      this.addInfoWindow(marker, content);
-    }); **/
   }
 
   addInfoWindow(marker, content) {
@@ -123,7 +106,9 @@ export class GamePage implements OnInit {
 
       this.loadMap();
     });
+
   }
+
 
 
   addMarker(marker: Marker) {
@@ -165,7 +150,6 @@ export class GamePage implements OnInit {
 
     return mapMarker;
   }
-
   lanzarPopUp(kokapena){
     switch(kokapena){
       case "Euskal Herriko meatzaritza museoa":
