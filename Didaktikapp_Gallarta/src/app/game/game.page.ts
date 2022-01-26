@@ -172,13 +172,13 @@ export class GamePage implements OnInit {
         break;
 
       case "Gallarta berriaren monumentua":
-        this.abrirVideo('1', '../../assets/video/video_jard1.mp4', 'Hasi galdetegia');
+        this.abrirVideo('1', '../../assets/video/video_jard2.mp4', 'Hasi galdetegia');
         break;
       case "Tiranoko meatzaritza ospitalea (Prebentorioa)":
-        this.abrirJuego3();
+        this.abrirVideo('2', '../../assets/video/video_jard7.mp4', 'Hasi galdetegia');
         break;
       case "Dolores Ibarruri estatua":
-        this.abrirJuego2();
+        this.abrirVideo('3', '../../assets/video/video_jard1.mp4', 'Hasi galdetegia');
         break;
     };
   }
@@ -209,15 +209,21 @@ export class GamePage implements OnInit {
     await popover.onDidDismiss();
 
     if(ekintza==="1"){
-      this.abrirJuego1();
+      this.abrirJuegoGenerico(TestjokoaPage, 'test-joko');
+    }
+    else if(ekintza==="2"){
+      this.abrirJuegoGenerico(LetraordenatuPage, 'letra-ordenatu');
+    }
+    else if(ekintza==="3"){
+      this.abrirJuegoGenerico(HutsuneakbetePage, 'hutsuneak-bete');
     }
   }
 
-  async abrirJuego1(){
+  async abrirJuegoGenerico(pageName, cssClass){
     const popover = await this.popoverController.create({
       animated: true,
-      component: TestjokoaPage,
-      cssClass: 'test-joko',
+      component: pageName,
+      cssClass: cssClass,
       translucent: true,
       backdropDismiss: false,
       componentProps: {
@@ -229,32 +235,7 @@ export class GamePage implements OnInit {
 
     await popover.onDidDismiss();
 
-    await this.abrirVideo('2', '../../assets/video/video_jard1amaiera.mp4', 'Itxi');
+    await this.abrirVideo('0', '../../assets/video/video_jard1amaiera.mp4', 'Itxi');
   }
 
-  async abrirJuego2(){
-    const popover = await this.popoverController.create({
-      animated: true,
-      component: LetraordenatuPage,
-      cssClass: 'letra-ordenatu',
-      translucent: true,
-      backdropDismiss: false,
-      componentProps: {
-        controller: this.popoverController
-      }
-    });
-    return await popover.present();
-  }
-
-
-  async abrirJuego3(){
-    const popover = await this.popoverController.create({
-      animated: true,
-      component: HutsuneakbetePage,
-      cssClass: 'hutsuneak-bete',
-      translucent: true,
-      backdropDismiss: false
-    });
-    return await popover.present();
-  }
 }
