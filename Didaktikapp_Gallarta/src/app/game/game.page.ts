@@ -4,6 +4,7 @@ import {LokalizazioakService} from './../../service/lokalizazioak.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { TestjokoaPage } from '../testjokoa/testjokoa.page';
 import { VideoPage } from '../video/video.page';
+import {HutsuneakbetePage} from '../hutsuneakbete/hutsuneakbete.page';
 
 
 declare var google;
@@ -169,9 +170,12 @@ export class GamePage implements OnInit {
       case "Euskal Herriko meatzaritza museoa":
         break;
 
-      case "Gallarta berriaren montumentua":
+      case "Gallarta berriaren monumentua":
         this.abrirJuego();
         this.abrirVideo();
+        break;
+      case "Tiranoko meatzaritza ospitalea (Prebentorioa)":
+        this.abrirJuego3();
         break;
     };
   }
@@ -208,5 +212,14 @@ export class GamePage implements OnInit {
     });
     return await popover.present();
   }
-
+  async abrirJuego3(){
+    const popover = await this.popoverController.create({
+      animated: true,
+      component: HutsuneakbetePage,
+      cssClass: 'hutsuneak-bete',
+      translucent: true,
+      backdropDismiss: false
+    });
+    return await popover.present();
+  }
 }
