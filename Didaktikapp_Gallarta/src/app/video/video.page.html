@@ -1,11 +1,11 @@
 <ion-content>
-  <video [hidden]=isButtonHidden (ended)="vidEnded()" id="myVideo" width="300" height="200" autoplay>
+  <video [hidden]=isVideoHidden (ended)="vidEnded()" id="myVideo" width="300" height="200" autoplay>
     <source src="{{video}}" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 
   <div class="center">
-    <ion-button [hidden]=isVideoHidden (click)="closeVideo()">{{ekintza}}</ion-button>
+    <ion-button [hidden]=isButtonHidden (click)="closeVideo()">{{ekintza}}</ion-button>
   </div>
 
 </ion-content>
