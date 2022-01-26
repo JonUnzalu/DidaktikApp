@@ -5,6 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { TestjokoaPage } from '../testjokoa/testjokoa.page';
 import { VideoPage } from '../video/video.page';
 import {HutsuneakbetePage} from '../hutsuneakbete/hutsuneakbete.page';
+import {LetraordenatuPage} from "../letraordenatu/letraordenatu.page";
 
 
 declare var google;
@@ -176,6 +177,9 @@ export class GamePage implements OnInit {
       case "Tiranoko meatzaritza ospitalea (Prebentorioa)":
         this.abrirJuego3();
         break;
+      case "Dolores Ibarruri estatua":
+        this.abrirJuego2();
+        break;
     };
   }
 
@@ -227,7 +231,22 @@ export class GamePage implements OnInit {
 
     await this.abrirVideo('2', '../../assets/video/video_jard1amaiera.mp4', 'Itxi');
   }
-  
+
+  async abrirJuego2(){
+    const popover = await this.popoverController.create({
+      animated: true,
+      component: LetraordenatuPage,
+      cssClass: 'letra-ordenatu',
+      translucent: true,
+      backdropDismiss: false,
+      componentProps: {
+        controller: this.popoverController
+      }
+    });
+    return await popover.present();
+  }
+
+
   async abrirJuego3(){
     const popover = await this.popoverController.create({
       animated: true,

@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'hutsuneakbete',
     loadChildren: () => import('./hutsuneakbete/hutsuneakbete.module').then( m => m.HutsuneakbetePageModule)
+  },
+  {
+    path: 'letraordenatu',
+    loadChildren: () => import('./letraordenatu/letraordenatu.module').then( m => m.LetraordenatuPageModule)
   }
 
 ];
