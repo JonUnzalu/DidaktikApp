@@ -4,8 +4,14 @@
     Your browser does not support the video tag.
   </video>
 
-  <div style="text-align: center;margin-top: 25%;">
+  <!--PARA LA APP-->
+  <!--<div [hidden]=isButtonHidden style="text-align: center;margin-top: 25%;">
     <ion-button [hidden]=isButtonHidden (click)="closeVideo()">{{ekintza}}</ion-button>
-  </div>
+  </div> --> 
 
+  
+  <!--PARA DESARROLLO-->
+  <div  style="text-align: center;margin-top: 25%;">
+    <ion-button (click)="closeVideo()">{{ekintza}}</ion-button>
+  </div>
 </ion-content>

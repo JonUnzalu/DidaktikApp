@@ -206,20 +206,22 @@ export class GamePage implements OnInit {
     });
     await popover.present();
 
+    //Esperar a que se cierre el video
     await popover.onDidDismiss();
 
+    //Cuando el video se cierre lanzamos el popup
     if(ekintza==="1"){
-      this.abrirJuegoGenerico(TestjokoaPage, 'test-joko');
+      this.abrirJuego(TestjokoaPage, 'test-joko');
     }
     else if(ekintza==="2"){
-      this.abrirJuegoGenerico(LetraordenatuPage, 'letra-ordenatu');
+      this.abrirJuego(LetraordenatuPage, 'letra-ordenatu');
     }
     else if(ekintza==="3"){
-      this.abrirJuegoGenerico(HutsuneakbetePage, 'hutsuneak-bete');
+      this.abrirJuego(HutsuneakbetePage, 'hutsuneak-bete');
     }
   }
 
-  async abrirJuegoGenerico(pageName, cssClass){
+  async abrirJuego(pageName, cssClass){
     const popover = await this.popoverController.create({
       animated: true,
       component: pageName,
