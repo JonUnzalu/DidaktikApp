@@ -8,7 +8,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Hasiera', url: '/folder/Hasiera', icon: 'home' },
     { title: 'Mapa', url: '/game', icon: 'map' },
-    { title: 'Erabiltzailea', url: '/folder/Erabiltzea', icon: 'man' },
+    { title: 'Erabiltzailea', url: '/login', icon: 'man' },
   ];
 
   public labels = [''];
