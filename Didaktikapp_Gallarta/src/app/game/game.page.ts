@@ -214,10 +214,10 @@ export class GamePage implements OnInit {
       this.abrirJuego(TestjokoaPage, 'test-joko');
     }
     else if(ekintza==="2"){
-      this.abrirJuego(LetraordenatuPage, 'letra-ordenatu');
+      this.abrirJuego(HutsuneakbetePage, 'hutsuneak-bete');
     }
     else if(ekintza==="3"){
-      this.abrirJuego(HutsuneakbetePage, 'hutsuneak-bete');
+      this.abrirJuego(LetraordenatuPage, 'letra-ordenatu');
     }
   }
 
