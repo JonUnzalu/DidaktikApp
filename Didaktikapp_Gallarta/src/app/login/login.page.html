@@ -1,14 +1,17 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Izena sartu</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-label>ONGI ETORRI DIDAKTIKAPP-ERA</ion-label>
+  <ion-label>ONGI ETORRI DIDAKTIKAPP-ERA</ion-label><br>
   <ion-label>Jarri zure izena</ion-label>
   <ion-item>
     <ion-input type="text" placeholder="Erabiltzailea" [(ngModel)]="erabiltzailea"></ion-input>
-    <ion-button color="primary" (click)="hasiSaioa()"></ion-button>
   </ion-item>
+  <ion-button color="primary" (click)="hasiSaioa()">SARTU</ion-button>
+
 </ion-content>

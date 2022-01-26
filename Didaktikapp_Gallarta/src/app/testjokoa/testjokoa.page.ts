@@ -130,28 +130,26 @@ export class TestjokoaPage implements OnInit {
     else{
       this.indexGalderak = this.indexGalderak - 1;
 
-      this.abrirAlert();
-
       this.controller.dismiss();
     }
   }
 
-  async  abrirAlert(){
+  /**async  abrirAlert(){
     const alert =  await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Zorionak!',
-      subHeader: 'Hurrengo lekura joan zaitezke.',
-      message: ' ',
+      subHeader: '',
+      message: 'Orain Gallarta berriaren monumentua abiatuko gara',
       buttons: ['OK']
     });
 
     await alert.present();
-  }
+  } **/
 
   zuzendu(){
     if (this.aukeratutakoerantzuna===this.galderakarray[this.indexGalderak].erantzunz){
       this.colorVar1 = "white"
-      this.colorVar2= "white"
+      this.colorVar2=  "white"
       this.colorVar3 = "white"
       this.colorVar4 = "white"
       this.hurrengoGaldera()

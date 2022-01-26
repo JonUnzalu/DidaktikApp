@@ -1,14 +1,11 @@
 <ion-content>
-  <video id="myVideo" width="300" height="200" autoplay>
-    <source src="../../assets/video/video_jard1.mp4" type="video/mp4">
+  <video [hidden]=isButtonHidden (ended)="vidEnded()" id="myVideo" width="300" height="200" autoplay>
+    <source src="{{video}}" type="video/mp4">
     Your browser does not support the video tag.
   </video>
-  <ion-button>Jolastu</ion-button>
-</ion-content>
 
-<script>
-var vid = document.getElementById("myVideo");
-vid.oncanplay = function() {
-  alert("Can start playing video");
-};
-</script>
+  <div class="center">
+    <ion-button [hidden]=isVideoHidden (click)="closeVideo()">{{ekintza}}</ion-button>
+  </div>
+
+</ion-content>

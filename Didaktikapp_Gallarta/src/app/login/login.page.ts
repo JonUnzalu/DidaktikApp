@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +10,14 @@ export class LoginPage implements OnInit {
 
   erabiltzailea = '';
 
-  constructor() { }
+  constructor(private route: Router) { }
 
   ngOnInit() {
   }
 
   hasiSaioa(){
     localStorage.setItem('erabiltzailea', this.erabiltzailea)
+    this.route.navigate(['/folder/Hasiera']);
   }
 
 }
