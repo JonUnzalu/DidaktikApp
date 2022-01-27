@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {DOCUMENT} from "@angular/common";
+import { PopoverController } from '@ionic/angular';
 
 
 interface Galdera {
@@ -20,15 +21,12 @@ export class LetraordenatuPage implements OnInit {
   public argaz: string;
   public desorden: string;
 
+  @Input() controller: PopoverController;
+
   public indexGalderak: number;
   public indexErantzuna: number;
 
-  // public desor: string;
-  // public arga: string;
-  // public era: string;
-  // public eraz: string;
-
-  constructor() { }
+  constructor(public popoverController: PopoverController) { }
 
   ngOnInit() {
     this.gald = this.galderakarray[0].galdera;
@@ -47,9 +45,9 @@ export class LetraordenatuPage implements OnInit {
   },
     {
       galdera: "Nola deitzen zioten doloresi?",
-      desordenatuta: "NOSIALAARPIA",
+      desordenatuta: "NOSIALAA RPIA",
       argazkia: "../../assets/img/meatzariak.jpg",
-      erantzuna: "LAPASIONARIA",
+      erantzuna: "LA PASIONARIA",
       erantzunz: '3'
     }, {
       galdera: "Zenbat ordu lan egiten zuten meatzariak?",
@@ -93,6 +91,8 @@ export class LetraordenatuPage implements OnInit {
       document.getElementById(idBoton).addEventListener("click", () => {
         document.getElementById(idPadre).hidden = false;
         document.getElementById(idBoton).remove();
+
+        this.indexErantzuna = this.indexErantzuna - 1;
       });
     }
 
@@ -107,16 +107,20 @@ export class LetraordenatuPage implements OnInit {
       erabiltzaileErantzuna += document.getElementById('e' + i).innerHTML.toString();
     }
 
+    console.log(erantzunZuzena + ", " + erabiltzaileErantzuna)
+
     if(erantzunZuzena === erabiltzaileErantzuna){
       this.indexGalderak = this.indexGalderak + 1;
-      this.gald = this.galderakarray[this.indexGalderak].galdera;
-      this.argaz = this.galderakarray[this.indexGalderak].argazkia;
+
       if (this.indexGalderak < this.galderakarray.length) {
+        this.gald = this.galderakarray[this.indexGalderak].galdera;
+        this.argaz = this.galderakarray[this.indexGalderak].argazkia;
+        
         this.BorrarBotones();
         this.indexErantzuna = 0;
         this.BotonesDesordenados();
       }else {
-        alert("Hemos llegado al final");
+        this.controller.dismiss()
       }
     }
     else{

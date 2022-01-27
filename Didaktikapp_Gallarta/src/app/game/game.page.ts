@@ -159,10 +159,10 @@ export class GamePage implements OnInit {
         this.abrirVideo('1', '../../assets/video/video_jard2.mp4', 'Hasi galdetegia');
         break;
       case "Tiranoko meatzaritza ospitalea (Prebentorioa)":
-        this.abrirVideo('2', '../../assets/video/video_jard7.mp4', 'Hasi galdetegia');
+        this.abrirVideo('2', '../../assets/video/video_jard7.mp4', 'Hasi jokoa');
         break;
       case "Dolores Ibarruri estatua":
-        this.abrirVideo('3', '../../assets/video/video_jard1.mp4', 'Hasi galdetegia');
+        this.abrirVideo('3', '../../assets/video/video_jard1.mp4', 'Hasi jokoa');
         break;
     };
   }
