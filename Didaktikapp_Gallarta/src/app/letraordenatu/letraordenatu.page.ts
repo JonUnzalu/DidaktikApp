@@ -115,7 +115,7 @@ export class LetraordenatuPage implements OnInit {
       if (this.indexGalderak < this.galderakarray.length) {
         this.gald = this.galderakarray[this.indexGalderak].galdera;
         this.argaz = this.galderakarray[this.indexGalderak].argazkia;
-        
+
         this.BorrarBotones();
         this.indexErantzuna = 0;
         this.BotonesDesordenados();
@@ -130,11 +130,6 @@ export class LetraordenatuPage implements OnInit {
         }
       }
     }
-
-
-    // this.indexGalderak = this.indexGalderak + 1;
-    // this.BotonesDesordenados();
-
   }
 
 }
