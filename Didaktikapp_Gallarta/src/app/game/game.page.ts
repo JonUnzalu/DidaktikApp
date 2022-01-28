@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule, PopoverController } from '@ionic/angular';
-import {LokalizazioakService} from './../../service/lokalizazioak.service';
+import { LokalizazioakService } from './../../service/lokalizazioak.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { TestjokoaPage } from '../testjokoa/testjokoa.page';
 import { VideoPage } from '../video/video.page';
-import {HutsuneakbetePage} from '../hutsuneakbete/hutsuneakbete.page';
-import {LetraordenatuPage} from "../letraordenatu/letraordenatu.page";
+import { HutsuneakbetePage } from '../hutsuneakbete/hutsuneakbete.page';
+import { LetraordenatuPage } from "../letraordenatu/letraordenatu.page";
 
 
 declare var google;
@@ -48,9 +48,9 @@ export class GamePage implements OnInit {
       this.longitudMapa = resp.coords.longitude;
 
       this.getLokalizazioak();
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
   }
 
   ngOnInit() {
@@ -61,15 +61,44 @@ export class GamePage implements OnInit {
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('map');
     // create LatLng object
-    //const myLatLng = {lat: this.latitudMapa, lng: this.longitudMapa};
-    const myLatLng = {lat: 43.3150917000, lng: -3.074205555555};
+    const myLatLngGeo = {lat: this.latitudMapa, lng: this.longitudMapa};
+    const myLatLng = { lat: 43.3150917000, lng: -3.074205555555 };
     // create map
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
       zoom: 18
     });
+
+    this.renderMarkers();
+
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      this.renderMarkers();
+      console.log("he pasado por aqui")
+      
+      var marker = new google.maps.Marker({
+        position: myLatLngGeo,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 10,
+          fillOpacity: 1,
+          strokeWeight: 2,
+          fillColor: '#5384ED',
+          strokeColor: '#ffffff',
+        }
+      });
+      
+      var circle = new google.maps.Circle({
+        center: marker.getPosition(),
+        radius: 100,
+        fillColor: "#0000FF",
+        fillOpacity: 0.1,
+        map: this.map,
+        strokeColor: "#FFFFFF",
+        strokeOpacity: 0.1,
+        strokeWeight: 2
+      });
+
+      marker.setMap(this.map);
+
       mapEle.classList.add('show-map');
     });
   }
@@ -92,10 +121,13 @@ export class GamePage implements OnInit {
 
       // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let i = 0; i < this.stringify.length; i++) {
-        const markerToAdd = {position: {
+        const markerToAdd = {
+          position: {
             lat: 0.0,
-            lng: 0.0, },
-        title: ''} as Marker;
+            lng: 0.0,
+          },
+          title: ''
+        } as Marker;
 
         markerToAdd.title = this.stringify[i].izena;
         markerToAdd.position.lng = parseFloat(this.stringify[i].longitudea);
@@ -128,12 +160,12 @@ export class GamePage implements OnInit {
     });
 
     let content =
-    "<ion-card style='margin:auto; text-align: center'>"+
-      "<ion-card-header>"+
-        "<ion-card-title id='kokapenIzena' style='text-align: center; margin: auto; font-size: 15px'>" + mapMarker.title +"</ion-card-title>"+
-      "</ion-card-header> "+
-      "<ion-button id='sartuBtn' style='text-align: center; width: 55px;height: 35px;'>SARTU</ion-button>"+
-    "</ion-card>"
+      "<ion-card style='margin:auto; text-align: center'>" +
+      "<ion-card-header>" +
+      "<ion-card-title id='kokapenIzena' style='text-align: center; margin: auto; font-size: 15px'>" + mapMarker.title + "</ion-card-title>" +
+      "</ion-card-header> " +
+      "<ion-button id='sartuBtn' style='text-align: center; width: 55px;height: 35px;'>SARTU</ion-button>" +
+      "</ion-card>"
 
 
 
@@ -150,8 +182,8 @@ export class GamePage implements OnInit {
 
     return mapMarker;
   }
-  lanzarPopUp(kokapena){
-    switch(kokapena){
+  lanzarPopUp(kokapena) {
+    switch (kokapena) {
       case "Euskal Herriko meatzaritza museoa":
         break;
 
@@ -169,13 +201,13 @@ export class GamePage implements OnInit {
 
   renderMarkers() {
     this.markersJson.forEach(marker => {
-      if(marker.title != ''){
+      if (marker.title != '') {
         this.addMarker(marker);
       }
     });
   }
 
-  async abrirVideo(ekintza, videoUrl, botoiEkintza){
+  async abrirVideo(ekintza, videoUrl, botoiEkintza) {
     const popover = await this.popoverController.create({
       animated: true,
       component: VideoPage,
@@ -194,18 +226,18 @@ export class GamePage implements OnInit {
     await popover.onDidDismiss();
 
     //Cuando el video se cierre lanzamos el popup
-    if(ekintza==="1"){
+    if (ekintza === "1") {
       this.abrirJuego(TestjokoaPage, 'test-joko');
     }
-    else if(ekintza==="2"){
+    else if (ekintza === "2") {
       this.abrirJuego(HutsuneakbetePage, 'hutsuneak-bete');
     }
-    else if(ekintza==="3"){
+    else if (ekintza === "3") {
       this.abrirJuego(LetraordenatuPage, 'letra-ordenatu');
     }
   }
 
-  async abrirJuego(pageName, cssClass){
+  async abrirJuego(pageName, cssClass) {
     const popover = await this.popoverController.create({
       animated: true,
       component: pageName,
