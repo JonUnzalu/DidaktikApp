@@ -7,11 +7,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-label>ONGI ETORRI DIDAKTIKAPP-ERA</ion-label><br>
-  <ion-label>Jarri zure izena</ion-label>
-  <ion-item>
-    <ion-input type="text" placeholder="Erabiltzailea" [(ngModel)]="erabiltzailea"></ion-input>
-  </ion-item>
-  <ion-button color="primary" (click)="hasiSaioa()">SARTU</ion-button>
+  <div>
+    <ion-label>ONGI ETORRI DIDAKTIKAPP-ERA</ion-label>
+    <br>
+    <ion-label id="label2">Jarri zure izena</ion-label>
+    <ion-item>
+      <ion-input type="text" placeholder="Erabiltzailea" [(ngModel)]="erabiltzailea"></ion-input>
+    </ion-item>
+    <ion-button (click)="hasiSaioa()">SARTU</ion-button>
+  </div>
 
 </ion-content>
