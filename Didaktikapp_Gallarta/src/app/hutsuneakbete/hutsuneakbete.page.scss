@@ -1,8 +1,8 @@
 #i3{
-  position: center;
   border: #0d0d0d 1px solid;
-  width: 50px;
+  width: 120px;
   height: 18px;
+  float: right;
 }
 #i0{
   float: left;
@@ -13,20 +13,22 @@
 #i1{
   float: right;
   border: #0d0d0d 1px solid;
-  width: 100px;
+  width: 120px;
   height: 18px;
   margin-right: 10px;
 }
 #i2{
   float: left;
   border: #0d0d0d 1px solid;
-  width: 50px;
+  width: 70px;
   height: 18px;
 }
 #i4{
+  float: right;
   border: #0d0d0d 1px solid;
-  width: 60px;
+  width: 70px;
   height: 18px;
+
 }
 ion-title{
   font-size: 15px;
@@ -44,6 +46,6 @@ ion-button{
   margin-top: 20px;
   height: 25px;
 }
-//ion-input{
-//  pointer-events: none;
-//}
+p{
+  display: inline;
+}
