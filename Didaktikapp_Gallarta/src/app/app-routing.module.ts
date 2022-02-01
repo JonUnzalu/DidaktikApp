@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'letraordenatu',
     loadChildren: () => import('./letraordenatu/letraordenatu.module').then( m => m.LetraordenatuPageModule)
+  },  {
+    path: 'zutabeaklotu',
+    loadChildren: () => import('./zutabeaklotu/zutabeaklotu.module').then( m => m.ZutabeaklotuPageModule)
   }
+
 
 ];
 
