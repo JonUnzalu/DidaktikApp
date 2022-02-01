@@ -31,6 +31,65 @@ export class GamePage implements OnInit {
   latitudMapa = 0.0;
   longitudMapa = 0.0;
 
+  markers: Marker[] = [
+    {
+      position: {
+        lat: 43.3172139999999,
+        lng: -3.074152777777778,
+      },
+      title: 'Dolores Ibarruri estatua'
+    },
+    {
+      position: {
+        lat: 43.3150917,
+        lng: -3.074205555555556,
+      },
+      title: 'Gallarta berriaren monumentua'
+    },
+    {
+      position: {
+        lat: 43.3115889,
+        lng: -3.073341666666667,
+      },
+      title: 'Gallarta zaharraren monumentua: Burdina'
+    },
+    {
+      position: {
+        lat: 43.3107722,
+        lng: -3.0748027777777778,
+      },
+      title: 'Meategia'
+    },
+    {
+      position: {
+        lat: 43.3115778,
+        lng: -3.0714305555555557,
+      },
+      title: 'Mineral garbitokia'
+    },
+    {
+      position: {
+        lat: 43.3113306,
+        lng: -3.0715583333333334,
+      },
+      title: 'Meatze-trenbidea'
+    },
+    {
+      position: {
+        lat: 43.3124111,
+        lng: -3.0754916666666667,
+      },
+      title: 'Tiranoko meatzaritza ospitalea (Prebentorioa)'
+    },
+    {
+      position: {
+        lat: 43.3116222,
+        lng: -3.0702333333333334,
+      },
+      title: 'Euskal Herriko meatzaritza museoa'
+    },
+  ];
+
   markersJson: Marker[] = [{
     position: {
       lat: 0.0,
@@ -47,7 +106,8 @@ export class GamePage implements OnInit {
       this.latitudMapa = resp.coords.latitude;
       this.longitudMapa = resp.coords.longitude;
 
-      this.getLokalizazioak();
+      this.loadMap();
+      //this.getLokalizazioak();
     }).catch((error) => {
       console.log('Error getting location', error);
     });
@@ -200,7 +260,7 @@ export class GamePage implements OnInit {
   }
 
   renderMarkers() {
-    this.markersJson.forEach(marker => {
+    this.markers.forEach(marker => {
       if (marker.title != '') {
         this.addMarker(marker);
       }

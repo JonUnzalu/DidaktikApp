@@ -13,6 +13,9 @@ export class LoginPage implements OnInit {
   constructor(private route: Router) { }
 
   ngOnInit() {
+    if(localStorage.getItem('erabiltzailea')!=null){
+      this.route.navigate(['/folder/Hasiera']);
+    }
   }
 
   hasiSaioa(){
