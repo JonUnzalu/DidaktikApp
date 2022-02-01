@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 
 
 interface Erantzunak {
@@ -21,8 +22,9 @@ export class HutsuneakbetePage implements OnInit {
   inputs: any;
   indexInputs: any;
   indexBtn: any;
+  @Input() controller: PopoverController;
 
-  constructor() {
+  constructor(public popoverController: PopoverController) {
   }
 
   ngOnInit() {
@@ -75,20 +77,9 @@ export class HutsuneakbetePage implements OnInit {
           break;
       }
     }
-    // if (this.botoiak[num].id.toString() === num.toString()) {
-    //   this.inputstateak[num].textuaDauka = true;
-    //   document.getElementById(num.toString()).hidden = true;
-    //   this.inputs[this.indexBtn].value = this.botoiak[num].innerHTML;
-    //   this.indexBtn += 1;
-    // }
   }
 
   kendu(letra) {
-    // console.log(document.getElementById(letra). + ' a')
-    // if(document.getElementById(letra).textContent !== ''){
-    // }
-    // this.inputs[0].value = 'a'
-
     for (let i = 0; i < this.inputs.length; i++) {
       if (this.inputs[i].id.toString() === letra.toString()) {
         const inputValue = this.inputs[i].value;
@@ -106,29 +97,28 @@ export class HutsuneakbetePage implements OnInit {
     }
   }
 
-    // for (let i = 0; i < this.inputs.length; i++) {
-    //     if (this.inputs[i].id.toString() === letra.toString()) {
-    //       if(this.inputstateak[i].textuaDauka) {
-    //         this.inputstateak[i].textuaDauka = false;
-    //
-    //         let hiddenId;
-    //         for(let q=0;q<this.inputs.length;q++){
-    //           console.log(document.getElementById('i' + q.toString()).textContent)  //Este sería el resul
-    //           console.log(this.inputs[i].value)     //Este es lo que tenemos en el input
-    //           console.log("---------------------")
-    //
-    //           if(this.inputs[i].value === document.getElementById('i' + q.toString()).textContent){
-    //             hiddenId = q;
-    //             break;
-    //           }
-    //         }
-    //
-    //         document.getElementById(hiddenId.toString()).hidden = false;
-    //         this.inputs[i].value = '';
-    //       }
-    //   }
-    // }
+  zuzendu(){
+    let todasBien = true;
 
+    for (let i = 0; i < this.inputs.length; i++) {
+      if(this.inputs[i].value === ''){
+        document.getElementById('i' + i.toString()).style.background = "#eb0909"
+        todasBien = false;
+      }
+      else if(this.inputs[i].value === this.erantzunakarray[i].erantzuna){
+        document.getElementById('i' + i.toString()).style.background = "#03ff24"
+      }
+      else{
+        document.getElementById('i' + i.toString()).style.background = "#eb0909"
+        todasBien = false;
+      }
+    }
+
+    if(todasBien){
+      this.controller.dismiss()
+    }
+
+  }
 
 
 }
