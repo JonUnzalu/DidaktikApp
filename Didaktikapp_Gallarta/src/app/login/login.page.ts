@@ -16,8 +16,12 @@ export class LoginPage implements OnInit {
   }
 
   hasiSaioa(){
-    localStorage.setItem('erabiltzailea', this.erabiltzailea)
-    this.route.navigate(['/folder/Hasiera']);
+    if(this.erabiltzailea===''){
+      alert("Erabiltzailea sartu behar duzu!");
+    }else{
+      localStorage.setItem('erabiltzailea', this.erabiltzailea);
+      this.route.navigate(['/folder/Hasiera']);
+    }
   }
 
 }
