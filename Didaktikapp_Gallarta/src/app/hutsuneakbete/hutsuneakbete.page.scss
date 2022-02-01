@@ -1,29 +1,29 @@
-#lau{
+#i3{
   position: center;
   border: #0d0d0d 1px solid;
   width: 50px;
   height: 18px;
 }
-#bat{
+#i0{
   float: left;
   border: #0d0d0d 1px solid;
   width: 60px;
   height: 18px;
 }
-#bi{
+#i1{
   float: right;
   border: #0d0d0d 1px solid;
   width: 100px;
   height: 18px;
   margin-right: 10px;
 }
-#hiru{
+#i2{
   float: left;
   border: #0d0d0d 1px solid;
   width: 50px;
   height: 18px;
 }
-#bost{
+#i4{
   border: #0d0d0d 1px solid;
   width: 60px;
   height: 18px;
@@ -44,3 +44,6 @@ ion-button{
   margin-top: 20px;
   height: 25px;
 }
+//ion-input{
+//  pointer-events: none;
+//}
