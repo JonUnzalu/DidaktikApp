@@ -133,7 +133,7 @@ export class GamePage implements OnInit {
 
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       console.log("he pasado por aqui")
-      
+
       var marker = new google.maps.Marker({
         position: myLatLngGeo,
         icon: {
@@ -145,7 +145,7 @@ export class GamePage implements OnInit {
           strokeColor: '#ffffff',
         }
       });
-      
+
       var circle = new google.maps.Circle({
         center: marker.getPosition(),
         radius: 100,
@@ -245,6 +245,7 @@ export class GamePage implements OnInit {
   lanzarPopUp(kokapena) {
     switch (kokapena) {
       case "Euskal Herriko meatzaritza museoa":
+        this.abrirVideo('8', '../../assets/video/video_jard8.mp4', 'Hasi jokoa');
         break;
 
       case "Gallarta berriaren monumentua":
@@ -255,6 +256,18 @@ export class GamePage implements OnInit {
         break;
       case "Dolores Ibarruri estatua":
         this.abrirVideo('3', '../../assets/video/video_jard1.mp4', 'Hasi jokoa');
+        break;
+      case "Gallarta zaharraren monumentua: Burdina":
+        this.abrirVideo('4', '../../assets/video/video_jard3.mp4', 'Hasi jokoa');
+        break;
+      case "Meategia":
+        this.abrirVideo('5', '../../assets/video/video_jard4.mp4', 'Hasi jokoa');
+        break;
+      case "Meatze-trenbidea":
+        this.abrirVideo('6', '../../assets/video/video_jard6.mp4', 'Hasi jokoa');
+        break;
+      case "Mineral garbitokia":
+        this.abrirVideo('7', '../../assets/video/video_jard5.mp4', 'Hasi jokoa');
         break;
     };
   }
