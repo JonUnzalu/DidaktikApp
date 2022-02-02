@@ -1,11 +1,23 @@
 ion-title{
-
   font-weight: bold;
   text-align: center;
 }
 ion-content{
   text-align: justify;
   text-justify: inter-word;
-  width: 300px;
-  height: 400px;
+  height: 280px;
+}
+p{
+  text-align: justify;
+  text-justify: inter-word;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+ion-img{
+  width: 120px;
+  height: 120px;
+}
+#upv{
+  float: right;
+
 }
