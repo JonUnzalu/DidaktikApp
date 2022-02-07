@@ -286,7 +286,7 @@ export class GamePage implements OnInit {
       component: VideoPage,
       cssClass: 'video-play',
       translucent: true,
-      backdropDismiss: false,
+      backdropDismiss: true,
       componentProps: {
         video: videoUrl,
         ekintza: botoiEkintza,
