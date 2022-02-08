@@ -31,6 +31,8 @@ export class GamePage implements OnInit {
   latitudMapa = 0.0;
   longitudMapa = 0.0;
 
+  indexMarker = 0;
+
   markers: Marker[] = [
     {
       position: {
@@ -129,6 +131,7 @@ export class GamePage implements OnInit {
       zoom: 18
     });
 
+    this.indexMarker = 0
     this.renderMarkers();
 
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
@@ -204,14 +207,26 @@ export class GamePage implements OnInit {
 
 
   addMarker(marker: Marker) {
+    let imageIcon = "";
     const imageGreen = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
     const imageRed = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    const imageYellow = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+
+    if(localStorage.getItem('progresua').toString()===this.indexMarker.toString()){
+      imageIcon = imageYellow
+    }
+    else if(Number(localStorage.getItem('progresua'))>Number(this.indexMarker)){
+      imageIcon = imageGreen
+    }
+    else{
+      imageIcon = imageRed
+    }
 
     let mapMarker = new google.maps.Marker({
       position: marker.position,
       map: this.map,
       title: marker.title,
-      icon: imageRed
+      icon: imageIcon
     });
 
     var infowindow = new google.maps.InfoWindow({
@@ -219,14 +234,23 @@ export class GamePage implements OnInit {
       enableEventPropagation: true
     });
 
-    let content =
-      "<ion-card style='margin:auto; text-align: center'>" +
-      "<ion-card-header>" +
-      "<ion-card-title id='kokapenIzena' style='text-align: center; margin: auto; font-size: 15px'>" + mapMarker.title + "</ion-card-title>" +
-      "</ion-card-header> " +
-      "<ion-button id='sartuBtn' style='text-align: center; width: 55px;height: 35px;'>SARTU</ion-button>" +
-      "</ion-card>"
+    let content = '';
 
+    if(localStorage.getItem('progresua').toString()===this.indexMarker.toString()){
+      content = "<ion-card style='margin:auto; text-align: center'>" +
+        "<ion-card-header>" +
+        "<ion-card-title id='kokapenIzena' style='text-align: center; margin: auto; font-size: 15px'>" + mapMarker.title + "</ion-card-title>" +
+        "</ion-card-header> " +
+        "<ion-button id='sartuBtn' style='text-align: center; width: 55px;height: 35px;'>SARTU</ion-button>" +
+        "</ion-card>"
+    }
+    else{
+      content = "<ion-card style='margin:auto; text-align: center'>" +
+        "<ion-card-header>" +
+        "<ion-card-title id='kokapenIzena' style='text-align: center; margin: auto; font-size: 15px'>" + mapMarker.title + "</ion-card-title>" +
+        "</ion-card-header> " +
+        "</ion-card>"
+    }
 
 
     google.maps.event.addListener(mapMarker, 'click', function () {
@@ -240,35 +264,37 @@ export class GamePage implements OnInit {
       });
     });
 
+    this.indexMarker = this.indexMarker + 1;
+
     return mapMarker;
   }
+  
   lanzarPopUp(kokapena) {
     switch (kokapena) {
-      case "Euskal Herriko meatzaritza museoa":
-        this.abrirVideo('8', '../../assets/video/video_jard8.mp4', 'Hasi jokoa');
-        break;
-
-      case "Gallarta berriaren monumentua":
-        this.abrirVideo('1', '../../assets/video/video_jard2.mp4', 'Hasi galdetegia');
-        break;
-      case "Tiranoko meatzaritza ospitalea (Prebentorioa)":
-        this.abrirVideo('2', '../../assets/video/video_jard7.mp4', 'Hasi jokoa');
-        break;
       case "Dolores Ibarruri estatua":
-        this.abrirVideo('3', '../../assets/video/video_jard1.mp4', 'Hasi jokoa');
+        this.abrirVideo('1', '../../assets/video/video_jard1.mp4', 'Hasi jokoa');
+        break;
+      case "Gallarta berriaren monumentua":
+        this.abrirVideo('2', '../../assets/video/video_jard2.mp4', 'Hasi galdetegia');
         break;
       case "Gallarta zaharraren monumentua: Burdina":
-        this.abrirVideo('4', '../../assets/video/video_jard3.mp4', 'Hasi jokoa');
+        this.abrirVideo('3', '../../assets/video/video_jard3.mp4', 'Hasi jokoa');
         break;
       case "Meategia":
-        this.abrirVideo('5', '../../assets/video/video_jard4.mp4', 'Hasi jokoa');
+        this.abrirVideo('4', '../../assets/video/video_jard4.mp4', 'Hasi jokoa');
+        break;
+      case "Mineral garbitokia":
+        this.abrirVideo('5', '../../assets/video/video_jard5.mp4', 'Hasi jokoa');
         break;
       case "Meatze-trenbidea":
         this.abrirVideo('6', '../../assets/video/video_jard6.mp4', 'Hasi jokoa');
         break;
-      case "Mineral garbitokia":
-        this.abrirVideo('7', '../../assets/video/video_jard5.mp4', 'Hasi jokoa');
+      case "Tiranoko meatzaritza ospitalea (Prebentorioa)":
+        this.abrirVideo('7', '../../assets/video/video_jard7.mp4', 'Hasi jokoa');
         break;
+      case "Euskal Herriko meatzaritza museoa":
+        this.abrirVideo('8', '../../assets/video/video_jard8.mp4', 'Hasi jokoa');
+        break;  
     };
   }
 
@@ -300,33 +326,47 @@ export class GamePage implements OnInit {
 
     //Cuando el video se cierre lanzamos el popup
     if (ekintza === "1") {
-      this.abrirJuego(TestjokoaPage, 'test-joko');
+      this.abrirJuego(LetraordenatuPage, 'letra-ordenatu', '1');
     }
     else if (ekintza === "2") {
-      this.abrirJuego(HutsuneakbetePage, 'hutsuneak-bete');
+      this.abrirJuego(TestjokoaPage, 'test-joko', '2');
     }
-    else if (ekintza === "3") {
-      this.abrirJuego(LetraordenatuPage, 'letra-ordenatu');
+    else if (ekintza === "7") {
+      this.abrirJuego(HutsuneakbetePage, 'hutsuneak-bete', '7');
+    }
+    else if(ekintza === "0"){
+
+    }
+    else{
+      this.abrirJuego(null, '', ekintza)
     }
   }
 
-  async abrirJuego(pageName, cssClass) {
-    const popover = await this.popoverController.create({
-      animated: true,
-      component: pageName,
-      cssClass: cssClass,
-      translucent: true,
-      backdropDismiss: false,
-      componentProps: {
-        controller: this.popoverController
-      }
-    });
-
-    await popover.present();
-
-    await popover.onDidDismiss();
+  async abrirJuego(pageName, cssClass, numeroJuego) {
+    if(pageName!=null){
+      const popover = await this.popoverController.create({
+        animated: true,
+        component: pageName,
+        cssClass: cssClass,
+        translucent: true,
+        backdropDismiss: false,
+        componentProps: {
+          controller: this.popoverController
+        }
+      });
+  
+      await popover.present();
+  
+      await popover.onDidDismiss();
+    }
+    
 
     await this.abrirVideo('0', '../../assets/video/video_jard1amaiera.mp4', 'Itxi');
+
+    console.log(numeroJuego)
+    localStorage.setItem('progresua', numeroJuego)
+
+    this.loadMap();
   }
 
 }

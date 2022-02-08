@@ -24,6 +24,7 @@ export class LoginPage implements OnInit {
       alert("Erabiltzailea sartu behar duzu!");
     }else{
       localStorage.setItem('erabiltzailea', this.erabiltzailea);
+      localStorage.setItem('progresua', '0')
       this.route.navigate(['/folder/Hasiera']);
     }
   }
