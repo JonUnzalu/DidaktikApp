@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -11,6 +12,8 @@ export class AppComponent {
     { title: 'Erabiltzailea', url: '/login', icon: 'man' },
   ];
 
-  public labels = [''];
+  public labelsFull = ['Dolores Ibarruri estatua', 'Gallarta berriaren monumentua','Gallarta zaharraren monumentua: Burdina', 'Meategia', 'Mineral garbitokia', 'Meatze-trenbidea', 'Tiranoko meatzaritza ospitalea (Prebentorioa)', 'Euskal Herriko meatzaritza museoa'];
+  public labels = []
+
   constructor() {}
 }

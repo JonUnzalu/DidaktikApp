@@ -6,6 +6,7 @@ import { TestjokoaPage } from '../testjokoa/testjokoa.page';
 import { VideoPage } from '../video/video.page';
 import { HutsuneakbetePage } from '../hutsuneakbete/hutsuneakbete.page';
 import { LetraordenatuPage } from "../letraordenatu/letraordenatu.page";
+import { AppComponent } from '../app.component';
 
 
 declare var google;
